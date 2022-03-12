@@ -5,7 +5,7 @@ const {routerAdmin}=require("./routes/admin");
 const Err= require("./util/err")
 const shop=require('./routes/shop');
 const path=require("path");
-const expressbars=require("express-handlebars")
+const  expressHbs=require("express-handlebars")
 
 // reading form data middleware
 app.use(bodyParser.urlencoded({extended:false}))
@@ -14,9 +14,16 @@ app.use(bodyParser.urlencoded({extended:false}))
 app.use(express.static(path.join(__dirname,"public")))
 
 // handlebars template middleware
-app.engine("hbs", expressbars.engine())
-app.set("view engine","hbs");
-app.set("views", "views")
+app.engine(
+  'hbs',
+  expressHbs.engine({
+    layoutsDir: 'views/layouts/',
+    defaultLayout: 'main-layout',
+    extname: 'hbs'
+  })
+);
+app.set('view engine', 'hbs');
+app.set('views', 'views');
 
 //pug template middleware
 // app.set("view engine", "pug");
