@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded({extended:false}))
 app.use(express.static(path.join(__dirname,"public")))
 
 // handlebars template middleware
-app.engine("hbs", expressbars())
+app.engine("hbs", expressbars.engine())
 app.set("view engine","hbs");
 app.set("views", "views")
 
