@@ -1,9 +1,9 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
-const {routerAdmin}=require("./routes/admin");
+const adminData = require('./routes/admin');
+const shopRoutes = require('./routes/shop');
 const Err= require("./util/err")
-const shop=require('./routes/shop');
 const path=require("path");
 const  expressHbs=require("express-handlebars")
 
@@ -25,13 +25,9 @@ app.engine(
 app.set('view engine', 'hbs');
 app.set('views', 'views');
 
-//pug template middleware
-// app.set("view engine", "pug");
-// app.set("views","views")
-
 // route use
-app.use("/admin",routerAdmin)
-app.use(shop)
+app.use('/admin', adminData.routes);
+app.use(shopRoutes);
 
 // error message
 app.use(Err);
